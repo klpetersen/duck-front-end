@@ -4,7 +4,7 @@ export default class LeaderBoard extends Component {
     render() {
         return (
             <div>
-                
+               LeaderBoard 
             </div>
         )
     }
