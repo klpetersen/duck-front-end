@@ -1,11 +1,11 @@
 
 /* Home page */
 div#viewer {
-
     text-align: center;
 }
 
 img#duckie{
+    padding:5%;
     width:50vw;
     height:auto;
 }
@@ -27,7 +27,7 @@ img#duckie{
 .nav-btn { 
    background: lightblue; 
    border-radius: 100px;
-   padding: 60px; 
+   padding: 4%; 
 }
 
 .nav-btn a { 
