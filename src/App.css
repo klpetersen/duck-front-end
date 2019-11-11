@@ -1,1 +1,28 @@
+/* Home page */
+div#viewer {
+    position:relative;
+}
 
+img#bathtub-img{
+    position: absolute;
+    /* text-align: center; */
+    margin-top:100px;
+    left:30%;
+    margin-top:17%;
+    z-index: 2;
+}
+
+img#duckie{
+    position: absolute;
+    z-index: 1;
+    width:400px;
+    height:auto;
+    left:36%;
+    /* text-align: center; */
+}
+
+img#bubbles{
+    position: absolute;
+    z-index:3;
+    left:30%;
+}
