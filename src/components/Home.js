@@ -8,7 +8,7 @@ export default class Home extends Component {
     componentDidMount(){
         fetch('http://localhost:3000/users')
         .then(resp=>resp.json())
-        .then(data=>console.log(data))
+        .then(data=>console.log('INITIAL FETCH ===> ', data))
     }
     
     render() {
