@@ -1,3 +1,4 @@
+
 /* Home page */
 div#viewer {
     position:relative;
@@ -26,3 +27,29 @@ img#bubbles{
     z-index:3;
     left:30%;
 }
+.navigation-bar { 
+    text-align: center;
+    margin: 20px 0 0 ;
+    padding: 10px 0;
+}
+
+.nav-list { 
+    list-style: none;
+    margin: 0 2px;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-btn { 
+   background: lightblue; 
+   border-radius: 100px;
+   padding: 60px; 
+}
+
+.nav-btn a { 
+    color: black; 
+    font-size: 20px; 
+    text-decoration: none;
+}
+
