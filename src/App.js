@@ -11,7 +11,7 @@ import Game from './components/Game'
 class App extends React.Component {
 
 render(){
-  console.log(this.props.history)
+  // console.log(this.props.history)
     return (
       <Router>
         <div>

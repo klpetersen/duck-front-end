@@ -36,3 +36,10 @@ img#duckie{
     text-decoration: none;
 }
 
+#canvas{
+    background: #89CFF0;
+}
+
+.hidden{
+    display:none;
+}
