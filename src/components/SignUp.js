@@ -29,24 +29,22 @@ export default class SignUp extends Component {
             })
         }).then(resp=>resp.json())
         .then(data=> {this.props.history.push('/')})
+    alert('Profile created! Welcome (: ')
     }
 
     render() {
 
         return (
-            <div>
-               <form onSubmit={this.handleSubmit}>
-                   <p>
-                    <label>Username</label>
-                    <input type='text' name="username" placeholder='Username' onChange={this.handleChange} value={this.state.username}/>
-                   </p>
-                   <p>
-                    <label>Password</label>
-                    <input type='text' name="password" placeholder='Password' onChange={this.handleChange} value={this.state.password} />  
-                   </p>
-                   <p>
-                    <input type='submit' value="submit" />  
-                   </p>
+            
+            <div className="form-page"> 
+             <form onSubmit={this.handleSubmit}>
+                <ul>
+                    <li><label>Username</label></li>
+                    <li><input type='text' name="username" placeholder='Username' onChange={this.handleChange} value={this.state.username}/></li>
+                    <li><label>Password</label></li>
+                    <li><input type='text' name="password" placeholder='Password' onChange={this.handleChange} value={this.state.password} /></li>  
+                    <li><input type='submit' value="submit" /></li>
+                </ul>
                </form>
             </div>
         )
