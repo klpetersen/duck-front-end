@@ -28,6 +28,7 @@ img#duckie{
    background: lightblue; 
    border-radius: 100px;
    padding: 40px; 
+   font-family: 'Raleway', sans-serif;
 }
 
 .nav-btn a { 

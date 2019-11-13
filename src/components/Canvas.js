@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import duck from '../duckie.png';
 import sushi from '../sushi.png';
+import tuna from '../tuna.png'
 export default class Canvas extends Component {
 
 
@@ -26,31 +27,33 @@ export default class Canvas extends Component {
         const c = canvas.getContext('2d');
         const duckImage = this.refs.duckImg;
         const sushiImage = this.refs.sushiImg;
+        const tunaImage = this.refs.tunaImg;
         c.font = "30px Arial";
 
-        function Sushi(x,y){
+        function Sushi(x,y,velocity,dist,imgSize, props){
             this.x = x;
             this.y = y;
-            this.dy = 3;
+            this.dy = velocity;
+            this.dist = dist
 
-            this.draw = () => {
-                c.drawImage(sushiImage, x, y, 100, 100);
+            this.draw = (image) => {
+                c.drawImage(image, x, y, 100, imgSize);
             }
         
-            this.update = (duck,num) => {
+            this.update = (duck, type, image) => {
 
                 if(y > canvas.height){
-                    y = -2 * canvas.height * Math.random();
+                    y = this.dist * canvas.height * Math.random();
                     x = Math.abs(Math.random() * canvas.width - 200);
                 }
                 y += this.dy;
-                this.draw();   
+                this.draw(image);   
 
                 if(this.getDistance(x, y, duck.x, duck.y) < 60){
                     // console.log('touched');
-                    y = -2 * canvas.height * Math.random();
+                    y = this.dist * canvas.height * Math.random();
                     x = Math.abs(Math.random() * canvas.width - 200);
-                    this.addEaten(num);
+                    this.addEaten(type);
                     // console.log(num);
                 }
             }
@@ -61,20 +64,34 @@ export default class Canvas extends Component {
                 return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
             }
 
-            this.addEaten = (n) => {
-                 num = n+1;
+            this.addEaten = (type) => {
+                if(type === 'ikura'){
+                    ikuraNum += 1;
+                    props.addNum(ikuraNum, 'ikura');
+                }else if(type === 'tuna'){
+                    tunaNum += 1;
+                    props.addNum(tunaNum, 'tuna');
+                }
             }
         }
 
-        let num = this.props.num;
 
+        let ikuraNum = this.props.ikuraNum;
         let sushis=[];
         for(let i=0; i< 5; i++){
             let x = Math.abs(Math.random() * canvas.width - 200);
             let y = -1 * canvas.height * Math.random(); // randomize this to be a smallish negative number.
             // it'll appear to take longer to appear on the screen 
-            sushis.push(new Sushi(x,y))
+            sushis.push(new Sushi(x,y,3,-2,100,this.props))
         } 
+
+        let tunaNum = this.props.tunaNum;
+        let tunaSushis = [];
+        for(let i=0; i< 2; i++){
+            let x = Math.abs(Math.random() * canvas.width - 200);
+            let y = -5 * canvas.height * Math.random(); 
+            tunaSushis.push(new Sushi(x,y,6,-5,75,this.props))
+        }
 
         this.setState({
             duck: {x:canvas.width*0.5, y:canvas.height-300},
@@ -90,10 +107,14 @@ export default class Canvas extends Component {
             requestAnimationFrame(animate);
             c.clearRect(0, 0, canvas.width, canvas.height);        
             c.drawImage(duckImage, this.state.duck.x, this.state.duck.y, 100, 100);
-            c.fillText(num, 50,50);
+            c.fillText('Ikura: '+ikuraNum, 50,50);
+            c.fillText('Tuna: '+tunaNum, 300,50);
             for(let i=0;i<sushis.length;i++){
-                    sushis[i].update(this.state.duck, num);
+                    sushis[i].update(this.state.duck, 'ikura', sushiImage);
             }
+            for(let i=0;i<tunaSushis.length;i++){
+                tunaSushis[i].update(this.state.duck, 'tuna', tunaImage);
+        }
         }
 
         animate();
@@ -141,8 +162,9 @@ export default class Canvas extends Component {
     render() {
         return (
             <div>
+                <img ref='tunaImg' src={tuna} className="hidden" alt="tuna sushi" />
                 <img ref='duckImg' src={duck} className="hidden" alt="duck" />
-                <img ref='sushiImg' src={sushi} className="hidden" alt="sushi" />
+                <img ref='sushiImg' src={sushi} className="hidden" alt="ikura roll" />
                 <canvas ref="canvas" id='canvas'></canvas>   
             </div>
         )

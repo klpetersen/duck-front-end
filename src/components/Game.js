@@ -4,7 +4,8 @@ import Timer from './Timer';
 
 export default class Game extends Component {
     state = {
-        num: 1, 
+        ikuraNum: 0,
+        tunaNum:0,
         seconds: 45, 
         gameOver: false
     }
@@ -16,6 +17,21 @@ export default class Game extends Component {
         this.updateTimer();
     }
 
+
+    addNum = (number, type) => {
+        if(type === 'ikura'){
+            this.setState({
+                ikuraNum: number
+            })
+        }else if(type === 'tuna'){
+            this.setState({
+                tunaNum: number
+            })
+        }
+        console.log(this.state)
+    }
+
+    
     updateTimer = () => { 
         setInterval(() => { 
             if (this.state.seconds > 0) { 
@@ -32,11 +48,15 @@ export default class Game extends Component {
     }
  
 
+
     render() {
         return (
             <div>
                 <Timer seconds={this.state.seconds} />
-                <Canvas num={this.state.num} addNum={this.addNum}/>
+                <Canvas ikuraNum={this.state.ikuraNum} 
+                        tunaNum={this.state.tunaNum}
+                        addNum={this.addNum}
+                        />
             </div>
         )
     }
