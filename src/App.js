@@ -10,16 +10,27 @@ import Game from './components/Game'
 
 class App extends React.Component {
 
+  state = { 
+    currentUser: null
+  }
+
+  setCurrentUser = (user) => { 
+    this.setState({ 
+      currentUser: user
+    })
+  }
+
 render(){
   // console.log(this.props.history)
+  console.log(this.state.currentUser)
     return (
       <Router>
         <div> 
-          <NavBar /> 
+          <NavBar currentUser={this.state.currentUser}/> 
           <Switch>
             <Route exact path="/" render={() => <Home /> }/>
-            <Route exact path="/login" render={() => <Login /> } /> 
-            <Route exact path='/signup' render={(routerProps) => <SignUp setUser={this.setUser} {...routerProps}/> } /> 
+            <Route exact path="/login" render={(routerProps) => <Login setCurrentUser={this.setCurrentUser} {...routerProps} /> } /> 
+            <Route exact path='/signup' render={(routerProps) => <SignUp setCurrentUser={this.setCurrentUser} {...routerProps}/> } /> 
             <Route exact path='/leaderboard' render={() => <LeaderBoard /> } /> 
             <Route exact path='/game' render={() => <Game /> } /> 
           </Switch>

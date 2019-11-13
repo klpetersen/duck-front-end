@@ -7,6 +7,7 @@ export default class Timer extends Component {
             <div>
                 <div className='timer-box'>
                     <h1>{this.props.seconds}</h1>
+                    {/* <button className='home-btn'>Home</button> */}
                 </div>
             </div>
         )

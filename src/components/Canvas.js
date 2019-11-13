@@ -78,7 +78,7 @@ export default class Canvas extends Component {
 
         let ikuraNum = this.props.ikuraNum;
         let sushis=[];
-        for(let i=0; i< 5; i++){
+        for(let i=0; i< 20; i++){
             let x = Math.abs(Math.random() * canvas.width - 200);
             let y = -1 * canvas.height * Math.random(); // randomize this to be a smallish negative number.
             // it'll appear to take longer to appear on the screen 
@@ -87,7 +87,7 @@ export default class Canvas extends Component {
 
         let tunaNum = this.props.tunaNum;
         let tunaSushis = [];
-        for(let i=0; i< 2; i++){
+        for(let i=0; i< 5; i++){
             let x = Math.abs(Math.random() * canvas.width - 200);
             let y = -5 * canvas.height * Math.random(); 
             tunaSushis.push(new Sushi(x,y,6,-5,75,this.props))
