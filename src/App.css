@@ -43,3 +43,38 @@ img#duckie{
 .hidden{
     display:none;
 }
+
+.form-page { 
+    width: 100%;
+    min-height: 100vh; 
+    position: relative;
+    /* background-image: url('./duck.gif') ; */
+    background-image: url('https://cdn.dribbble.com/users/1429491/screenshots/4323471/1dr.gif') ;
+    background-size: 100%;
+}
+
+form { 
+    background: #ff4d4d;
+    width: 270px; 
+    height: 175px;
+    margin-left: 40%;
+    margin-top: 250px;
+    border-radius: 200px;
+    position: absolute;
+}
+
+form ul { 
+    text-align: center;
+    list-style-type: none;
+    padding-top: 5px;  
+    padding-left: 0;
+    margin: 0; 
+}
+
+form li { 
+    padding: 6px;
+}
+
+/* form li input { 
+
+} */
