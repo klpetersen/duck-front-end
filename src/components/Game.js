@@ -6,7 +6,8 @@ export default class Game extends Component {
     state = {
         ikuraNum: 0,
         tunaNum:0,
-        seconds: 45, 
+        score: 0,
+        seconds: 5, 
         gameOver: false
     }
 
@@ -16,7 +17,6 @@ export default class Game extends Component {
         navbar.classList.remove('show');
         this.updateTimer();
     }
-
 
     addNum = (number, type) => {
         if(type === 'ikura'){
@@ -28,7 +28,14 @@ export default class Game extends Component {
                 tunaNum: number
             })
         }
-        console.log(this.state)
+        console.log(this.state.gameOver)
+    }
+
+    totalScore = (total) => {
+        this.setState({
+            score: total
+        })
+        console.log(this.state.score)
     }
 
     
@@ -47,8 +54,6 @@ export default class Game extends Component {
        
     }
  
-
-
     render() {
         return (
             <div>
@@ -56,6 +61,8 @@ export default class Game extends Component {
                 <Canvas ikuraNum={this.state.ikuraNum} 
                         tunaNum={this.state.tunaNum}
                         addNum={this.addNum}
+                        gameOver={this.state.gameOver}
+                        totalScore={this.totalScore}
                         />
             </div>
         )

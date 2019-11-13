@@ -69,7 +69,7 @@ export default class Canvas extends Component {
                     ikuraNum += 1;
                     props.addNum(ikuraNum, 'ikura');
                 }else if(type === 'tuna'){
-                    tunaNum += 1;
+                    tunaNum += 5;
                     props.addNum(tunaNum, 'tuna');
                 }
             }
@@ -104,17 +104,28 @@ export default class Canvas extends Component {
         }
 
         let animate = () => {
-            requestAnimationFrame(animate);
-            c.clearRect(0, 0, canvas.width, canvas.height);        
-            c.drawImage(duckImage, this.state.duck.x, this.state.duck.y, 100, 100);
-            c.fillText('Ikura: '+ikuraNum, 50,50);
-            c.fillText('Tuna: '+tunaNum, 300,50);
-            for(let i=0;i<sushis.length;i++){
-                    sushis[i].update(this.state.duck, 'ikura', sushiImage);
-            }
-            for(let i=0;i<tunaSushis.length;i++){
-                tunaSushis[i].update(this.state.duck, 'tuna', tunaImage);
-        }
+            let totalScore = ikuraNum + tunaNum
+            if(this.props.gameOver){
+            //    alert('game over!') 
+                  c.clearRect(0, 0, canvas.width, canvas.height); 
+                  canvas.setAttribute('style', 'background:black');
+                  c.fillStyle = 'white';
+                  this.props.totalScore(totalScore);
+                  c.fillText('Game Over', this.state.width*0.43, this.state.height*0.4);
+                  c.fillText('Total Score: '+ totalScore, this.state.width*0.43, this.state.height*0.6);
+            }else{
+                requestAnimationFrame(animate);
+                c.clearRect(0, 0, canvas.width, canvas.height);        
+                c.drawImage(duckImage, this.state.duck.x, this.state.duck.y, 100, 100);
+                // let totalScore = ikuraNum + tunaNum
+                c.fillText('Score: '+ totalScore, 50,50);
+                for(let i=0;i<sushis.length;i++){
+                        sushis[i].update(this.state.duck, 'ikura', sushiImage);
+                }
+                for(let i=0;i<tunaSushis.length;i++){
+                    tunaSushis[i].update(this.state.duck, 'tuna', tunaImage);
+                }  
+            }  
         }
 
         animate();
