@@ -84,6 +84,12 @@ input {
 }
 
 .timer-box { 
-    text-align: center;
+    text-align: center
 }
+
+/* .home-btn { 
+    float: right; 
+    position: relative;
+}  */
+
 

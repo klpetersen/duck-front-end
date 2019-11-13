@@ -7,7 +7,7 @@ export default class Game extends Component {
         ikuraNum: 0,
         tunaNum:0,
         score: 0,
-        seconds: 5, 
+        seconds: 45, 
         gameOver: false
     }
 
