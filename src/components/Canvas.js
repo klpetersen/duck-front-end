@@ -5,43 +5,55 @@ import sushi from '../sushi.png';
 export default class Canvas extends Component {
 
     state = {
-        duck: {x:0, y:0}
+        duck: {x:0, y:0},
+        sushis: []
     }
 
     componentDidMount(){
-        this.updateCanvas();
+        this.initiateCanvas();
         document.addEventListener('keydown', this.moveDuck)
     }
 
-    updateCanvas(){
+    componentDidUpdate(){
+        // console.log('changed')
+        console.log(this.state)
         const canvas = this.refs.canvas;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         const c = canvas.getContext('2d');
-        // const duckImage = new Image(70,70);
-        // duckImage.src='../duckie.png';
         const duckImage = this.refs.duckImg;
-        const sushiImage = this.refs.sushiImg;
+        let sushis = this.state.sushis;
+        let x = this.state.duck.x;
+        let y = this.state.duck.y;
 
-        duckImage.onload = () => {
-            this.setState({
-                duck: {x:canvas.width*0.5, y:canvas.height-300}
-            })
-            c.drawImage(duckImage, this.state.duck.x, this.state.duck.y, 100, 100);
+        function animate(){
+            requestAnimationFrame(animate);
+            c.clearRect(0, 0, canvas.width, canvas.height);        
+            c.drawImage(duckImage, x, y, 100, 100);
+            for(let i=0;i<sushis.length;i++){
+                sushis[i].update();
+            }
         }
 
+        animate();
+    }
+
+    initiateCanvas = () => {
+        const canvas = this.refs.canvas;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const c = canvas.getContext('2d');
+        const duckImage = this.refs.duckImg;
+        const sushiImage = this.refs.sushiImg;
 
         function Sushi(x,y){
             this.x = x;
             this.y = y;
-            
-            this.draw = () => {
-                console.log('!')
-                sushiImage.onload = () => {
-                    c.drawImage(sushiImage, x, y, 100, 100);
-                }
-            }
 
+            this.draw = () => {
+                c.drawImage(sushiImage, x, y, 100, 100);
+            }
+        
             this.update = function(){
                 if(y > canvas.height){
                     y = -2 * canvas.height * Math.random();
@@ -60,27 +72,48 @@ export default class Canvas extends Component {
             sushis.push(new Sushi(x,y))
         } 
 
-        let sushi = new Sushi(100,100)
-        console.log(sushi)
-        sushi.draw();
+        this.setState({
+            duck: {x:canvas.width*0.5, y:canvas.height-300},
+            sushis: sushis
+        })
 
-        // function animate(){
-        //     requestAnimationFrame(animate);
-        //     c.clearRect(0, 0, canvas.width, canvas.height);
-        //     for(let i=0;i<sushis.length;i++){
-        //         sushis[i].update();
-        //     }
-        // }
-
-        // animate();
+        duckImage.onload = () => {
+            c.drawImage(duckImage, this.state.duck.x, this.state.duck.y, 100, 100);
+        }
     }
 
     moveDuck = (event) => {
-        console.log(event.key)
+        let x = this.state.duck.x;
+        let y = this.state.duck.y;
+
+        switch(event.key){
+            case 'ArrowLeft':
+                
+                this.setState({
+                    duck: {x: x-10, y: y}
+                })
+                break;
+            case 'ArrowRight':
+                this.setState({
+                    duck: {x: x+10, y: y}
+                })
+                break;
+            case 'ArrowUp':
+                this.setState({
+                        duck: {x: x, y: y-10}
+                    })
+                break;
+            case 'ArrowDown':
+                    this.setState({
+                        duck: {x: x, y: y+10}
+                     })
+                    break;
+            default:
+                return this.state.duck;
+        }
     }
 
-   
-
+ 
     render() {
         return (
             <div>
