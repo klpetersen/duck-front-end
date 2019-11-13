@@ -6,7 +6,6 @@ export default class Canvas extends Component {
 
     state = {
         duck: {x:0, y:0},
-        // sushis: [],
         width:0,
         height:0
     }
@@ -16,6 +15,10 @@ export default class Canvas extends Component {
         document.addEventListener('keydown', this.moveDuck)
     }
 
+    // componentDidUpdate(){
+
+    // }
+
     initiateCanvas = () => {
         const canvas = this.refs.canvas;
         canvas.width = window.innerWidth;
@@ -23,6 +26,7 @@ export default class Canvas extends Component {
         const c = canvas.getContext('2d');
         const duckImage = this.refs.duckImg;
         const sushiImage = this.refs.sushiImg;
+        c.font = "30px Arial";
 
         function Sushi(x,y){
             this.x = x;
@@ -33,20 +37,21 @@ export default class Canvas extends Component {
                 c.drawImage(sushiImage, x, y, 100, 100);
             }
         
-            this.update = (duck) => {
+            this.update = (duck,num) => {
 
                 if(y > canvas.height){
                     y = -2 * canvas.height * Math.random();
-                    x = Math.random() * canvas.width;
+                    x = Math.abs(Math.random() * canvas.width - 200);
                 }
                 y += this.dy;
                 this.draw();   
 
                 if(this.getDistance(x, y, duck.x, duck.y) < 60){
-                    console.log('touched');
+                    // console.log('touched');
                     y = -2 * canvas.height * Math.random();
-                    x = Math.random() * canvas.width;
-
+                    x = Math.abs(Math.random() * canvas.width - 200);
+                    this.addEaten(num);
+                    // console.log(num);
                 }
             }
 
@@ -55,11 +60,17 @@ export default class Canvas extends Component {
                 let yDistance = y2 - y1;
                 return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
             }
+
+            this.addEaten = (n) => {
+                 num = n+1;
+            }
         }
+
+        let num = this.props.num;
 
         let sushis=[];
         for(let i=0; i< 5; i++){
-            let x = Math.random() * canvas.width;
+            let x = Math.abs(Math.random() * canvas.width - 200);
             let y = -1 * canvas.height * Math.random(); // randomize this to be a smallish negative number.
             // it'll appear to take longer to appear on the screen 
             sushis.push(new Sushi(x,y))
@@ -67,7 +78,6 @@ export default class Canvas extends Component {
 
         this.setState({
             duck: {x:canvas.width*0.5, y:canvas.height-300},
-            // sushis: sushis,
             width: canvas.width,
             height: canvas.height
         })
@@ -80,14 +90,9 @@ export default class Canvas extends Component {
             requestAnimationFrame(animate);
             c.clearRect(0, 0, canvas.width, canvas.height);        
             c.drawImage(duckImage, this.state.duck.x, this.state.duck.y, 100, 100);
+            c.fillText(num, 50,50);
             for(let i=0;i<sushis.length;i++){
-                    sushis[i].update(this.state.duck);
-                    // console.log('distance===>', this.getDistance(sushis[i].x, sushis[i].y, this.state.duck.x, this.state.duck.y))
-                    // console.log('duck===>', this.state.duck.x, this.state.duck.y)
-                    // console.log('sushi==>', sushis[i].x, sushis[i].y)
-                    // if(this.getDistance(sushis[i].x, sushis[i].y, this.state.duck.x, this.state.duck.y) < 60){
-                    //     console.log('touched');
-                    // }
+                    sushis[i].update(this.state.duck, num);
             }
         }
 
@@ -102,28 +107,28 @@ export default class Canvas extends Component {
             case 'ArrowLeft':
                 if(x>0){
                     this.setState({
-                        duck: {x: x-20, y: y}
+                        duck: {x: x-50, y: y}
                     })
                 }
                 break;
             case 'ArrowRight':
                 if(x<this.state.width-100){
                     this.setState({
-                        duck: {x: x+20, y: y}
+                        duck: {x: x+50, y: y}
                     })
                 }
                 break;
             case 'ArrowUp':
                 if(y>0){
                     this.setState({
-                        duck: {x: x, y: y-20}
+                        duck: {x: x, y: y-50}
                     })
                 }
                 break;
             case 'ArrowDown':
                 if(y<this.state.height-100){
                     this.setState({
-                        duck: {x: x, y: y+20}
+                        duck: {x: x, y: y+50}
                      })
                 } 
                 break;
