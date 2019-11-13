@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import duck from '../duckie.png';
 import sushi from '../sushi.png';
-
 export default class Canvas extends Component {
+
 
     state = {
         duck: {x:0, y:0},
@@ -148,4 +148,7 @@ export default class Canvas extends Component {
             </div>
         )
     }
+
+   
+
 }
