@@ -29,7 +29,7 @@ export default class Login extends Component {
                     <li><input type='text' name="username" placeholder='Username' onChange={this.handleChange} value={this.state.username}/></li>
                     <li><label>Password</label></li>
                     <li><input type='text' name="password" placeholder='Password' onChange={this.handleChange} value={this.state.password} /></li>  
-                    <li><input type='submit' value="submit" /></li>
+                    <li><input type='submit' value="submit" className='submit-btn'/></li>
                 </ul>
                </form>
             </div>
