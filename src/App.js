@@ -14,7 +14,7 @@ render(){
   // console.log(this.props.history)
     return (
       <Router>
-        <div>
+        <div> 
           <NavBar /> 
           <Switch>
             <Route exact path="/" render={() => <Home /> }/>
