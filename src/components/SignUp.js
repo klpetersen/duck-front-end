@@ -28,7 +28,7 @@ export default class SignUp extends Component {
                 avatar: this.state.avatar
             })
         }).then(resp=>resp.json())
-        .then(data=> {this.props.history.push('/home')})
+        .then(data=> {this.props.history.push('/')})
     }
 
     render() {
