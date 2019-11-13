@@ -6,7 +6,9 @@ export default class Canvas extends Component {
 
     state = {
         duck: {x:0, y:0},
-        sushis: []
+        sushis: [],
+        width:0,
+        height:0
     }
 
     componentDidMount(){
@@ -14,29 +16,30 @@ export default class Canvas extends Component {
         document.addEventListener('keydown', this.moveDuck)
     }
 
-    componentDidUpdate(){
-        // console.log('changed')
-        console.log(this.state)
-        const canvas = this.refs.canvas;
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const c = canvas.getContext('2d');
-        const duckImage = this.refs.duckImg;
-        let sushis = this.state.sushis;
-        let x = this.state.duck.x;
-        let y = this.state.duck.y;
+    // componentDidUpdate(){
+    //     // console.log('changed')
+    //     // console.log(this.state)
+    //     const canvas = this.refs.canvas;
+    //     canvas.width = window.innerWidth;
+    //     canvas.height = window.innerHeight;
+    //     const c = canvas.getContext('2d');
+    //     const duckImage = this.refs.duckImg;
+    //     let sushis = this.state.sushis;
+    //     let x = this.state.duck.x;
+    //     let y = this.state.duck.y;
+    //     c.drawImage(duckImage, x, y, 100, 100);
 
-        function animate(){
-            requestAnimationFrame(animate);
-            c.clearRect(0, 0, canvas.width, canvas.height);        
-            c.drawImage(duckImage, x, y, 100, 100);
-            for(let i=0;i<sushis.length;i++){
-                sushis[i].update();
-            }
-        }
+    //     let animate=()=>{
+    //         requestAnimationFrame(animate);
+    //         c.clearRect(0, 0, canvas.width, canvas.height);        
+    //         // c.drawImage(duckImage, x, y, 100, 100);
+    //         for(let i=0;i<sushis.length;i++){
+    //                 sushis[i].update();
+    //         }
+    //     }
 
-        animate();
-    }
+    //     // animate();
+    // }
 
     initiateCanvas = () => {
         const canvas = this.refs.canvas;
@@ -46,9 +49,11 @@ export default class Canvas extends Component {
         const duckImage = this.refs.duckImg;
         const sushiImage = this.refs.sushiImg;
 
+
         function Sushi(x,y){
             this.x = x;
             this.y = y;
+            this.dy = 3;
 
             this.draw = () => {
                 c.drawImage(sushiImage, x, y, 100, 100);
@@ -59,7 +64,7 @@ export default class Canvas extends Component {
                     y = -2 * canvas.height * Math.random();
                     x = Math.random() * canvas.width;
                 }
-                y += 3;
+                y += this.dy;
                 this.draw();   
             }
         }
@@ -74,12 +79,25 @@ export default class Canvas extends Component {
 
         this.setState({
             duck: {x:canvas.width*0.5, y:canvas.height-300},
-            sushis: sushis
+            sushis: sushis,
+            width: canvas.width,
+            height: canvas.height
         })
 
         duckImage.onload = () => {
             c.drawImage(duckImage, this.state.duck.x, this.state.duck.y, 100, 100);
         }
+
+        let animate = () => {
+            requestAnimationFrame(animate);
+            c.clearRect(0, 0, canvas.width, canvas.height);        
+            c.drawImage(duckImage, this.state.duck.x, this.state.duck.y, 100, 100);
+            for(let i=0;i<sushis.length;i++){
+                    sushis[i].update();
+            }
+        }
+
+        animate();
     }
 
     moveDuck = (event) => {
@@ -88,26 +106,33 @@ export default class Canvas extends Component {
 
         switch(event.key){
             case 'ArrowLeft':
-                
-                this.setState({
-                    duck: {x: x-10, y: y}
-                })
+                if(x>0){
+                    this.setState({
+                        duck: {x: x-20, y: y}
+                    })
+                }
                 break;
             case 'ArrowRight':
-                this.setState({
-                    duck: {x: x+10, y: y}
-                })
+                if(x<this.state.width-100){
+                    this.setState({
+                        duck: {x: x+20, y: y}
+                    })
+                }
                 break;
             case 'ArrowUp':
-                this.setState({
-                        duck: {x: x, y: y-10}
+                if(y>0){
+                    this.setState({
+                        duck: {x: x, y: y-20}
                     })
+                }
                 break;
             case 'ArrowDown':
+                if(y<this.state.height-100){
                     this.setState({
-                        duck: {x: x, y: y+10}
+                        duck: {x: x, y: y+20}
                      })
-                    break;
+                } 
+                break;
             default:
                 return this.state.duck;
         }
