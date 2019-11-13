@@ -17,7 +17,7 @@ render(){
         <div>
           <NavBar /> 
           <Switch>
-            <Route exact path="/home" render={() => <Home /> }/>
+            <Route exact path="/" render={() => <Home /> }/>
             <Route exact path="/login" render={() => <Login /> } /> 
             <Route exact path='/signup' render={(routerProps) => <SignUp setUser={this.setUser} {...routerProps}/> } /> 
             <Route exact path='/leaderboard' render={() => <LeaderBoard /> } /> 

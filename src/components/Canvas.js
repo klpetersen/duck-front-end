@@ -16,31 +16,6 @@ export default class Canvas extends Component {
         document.addEventListener('keydown', this.moveDuck)
     }
 
-    // componentDidUpdate(){
-    //     // console.log('changed')
-    //     // console.log(this.state)
-    //     const canvas = this.refs.canvas;
-    //     canvas.width = window.innerWidth;
-    //     canvas.height = window.innerHeight;
-    //     const c = canvas.getContext('2d');
-    //     const duckImage = this.refs.duckImg;
-    //     let sushis = this.state.sushis;
-    //     let x = this.state.duck.x;
-    //     let y = this.state.duck.y;
-    //     c.drawImage(duckImage, x, y, 100, 100);
-
-    //     let animate=()=>{
-    //         requestAnimationFrame(animate);
-    //         c.clearRect(0, 0, canvas.width, canvas.height);        
-    //         // c.drawImage(duckImage, x, y, 100, 100);
-    //         for(let i=0;i<sushis.length;i++){
-    //                 sushis[i].update();
-    //         }
-    //     }
-
-    //     // animate();
-    // }
-
     initiateCanvas = () => {
         const canvas = this.refs.canvas;
         canvas.width = window.innerWidth;
