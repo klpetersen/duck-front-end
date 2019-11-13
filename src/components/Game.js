@@ -4,7 +4,8 @@ import Timer from './Timer';
 
 export default class Game extends Component {
     state = {
-        num: 1
+        ikuraNum: 0,
+        tunaNum:0
     }
 
     componentDidMount(){
@@ -13,18 +14,27 @@ export default class Game extends Component {
         navbar.classList.remove('show');
     }
 
-    // addNum = (number) => {
-    //     this.setState({
-    //         num: number
-    //     })
-    //     console.log(number)
-    // }
+    addNum = (number, type) => {
+        if(type === 'ikura'){
+            this.setState({
+                ikuraNum: number
+            })
+        }else if(type === 'tuna'){
+            this.setState({
+                tunaNum: number
+            })
+        }
+        console.log(this.state)
+    }
 
     render() {
         return (
             <div>
                 <Timer />
-                <Canvas num={this.state.num} addNum={this.addNum}/>
+                <Canvas ikuraNum={this.state.ikuraNum} 
+                        tunaNum={this.state.tunaNum}
+                        addNum={this.addNum}
+                        />
             </div>
         )
     }
