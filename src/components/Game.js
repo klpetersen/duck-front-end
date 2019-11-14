@@ -6,6 +6,7 @@ export default class Game extends Component {
     state = {
         ikuraNum: 0,
         tunaNum:0,
+        poopNum:0,
         score: 0,
         seconds: 5, 
         gameOver: false
@@ -16,7 +17,6 @@ export default class Game extends Component {
         navbar.classList.add('hidden');
         navbar.classList.remove('show');
         this.updateTimer();
-        console.log(this.props.currentUser)
     }
 
 
@@ -29,6 +29,10 @@ export default class Game extends Component {
         }else if(type === 'tuna'){
             this.setState({
                 tunaNum: number
+            })
+        }else if(type === 'poop'){
+            this.setState({
+                poopNum: number
             })
         }
     }
@@ -59,7 +63,6 @@ export default class Game extends Component {
 
 
     saveGameOver = () => { 
-        console.log(this.state.score, this.props.currentUser.id)
         fetch('http://localhost:3000/games', { 
             method: 'POST', 
             headers: { 
@@ -80,6 +83,7 @@ export default class Game extends Component {
                 <Timer seconds={this.state.seconds} {...this.props} />
                 <Canvas ikuraNum={this.state.ikuraNum} 
                         tunaNum={this.state.tunaNum}
+                        poopNum={this.state.poopNum}
                         addNum={this.addNum}
                         gameOver={this.state.gameOver}
                         totalScore={this.totalScore}
