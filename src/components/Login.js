@@ -7,6 +7,10 @@ export default class Login extends Component {
         username:''
     }
 
+    componentDidMount(){
+        this.props.signOut()
+    }
+
     handleChange = (event) => {
         let target = event.target;
         this.setState({
@@ -36,6 +40,7 @@ export default class Login extends Component {
             <div className="form-page"> 
              <form onSubmit={this.handleSubmit}>
                 <ul>
+                    <li>Login here!</li>
                     <li><label>Username</label></li>
                     <li><input type='text' name="username" placeholder='Username' onChange={this.handleChange} value={this.state.username}/></li>
                     <li><input type='submit' value="submit" className='submit-btn'/></li>
