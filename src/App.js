@@ -20,16 +20,22 @@ class App extends React.Component {
     })
   }
 
+  signOut = () => {
+    this.setState({
+      currentUser: null
+    })
+  }
+
 render(){
   // console.log(this.props.history)
-  console.log(this.state.currentUser)
+  // console.log(this.state.currentUser)
     return (
       <Router>
         <div> 
           <NavBar currentUser={this.state.currentUser}/> 
           <Switch>
             <Route exact path="/" render={() => <Home /> }/>
-            <Route exact path="/login" render={(routerProps) => <Login setCurrentUser={this.setCurrentUser} {...routerProps} /> } /> 
+            <Route exact path="/login" render={(routerProps) => <Login setCurrentUser={this.setCurrentUser} signOut={this.signOut} {...routerProps} /> } /> 
             <Route exact path='/signup' render={(routerProps) => <SignUp setCurrentUser={this.setCurrentUser} {...routerProps}/> } /> 
             <Route exact path='/leaderboard' render={() => <LeaderBoard /> } /> 
             <Route exact path='/game' render={() => <Game /> } /> 
