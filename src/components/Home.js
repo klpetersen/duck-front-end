@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import duckie from '../ducky.png';
-import Show from './Show';
+import HomeShow from './HomeShow';
 
 export default class Home extends Component {
 
@@ -11,7 +11,7 @@ export default class Home extends Component {
 
 
     componentDidMount(){
-        console.log(this.props.currentUser)
+
         if(this.props.currentUser !== null){
             this.fetchGames()
         }
@@ -36,7 +36,7 @@ export default class Home extends Component {
             return (
                 <div>
                     <h1>Welcome, {this.props.currentUser.name}</h1>
-                    <Show games={this.state.games}/>
+                    <HomeShow games={this.state.games}/>
                 </div>
             )
         }else{
@@ -52,7 +52,6 @@ export default class Home extends Component {
 
 
 // state = {
-//     // userGames: [],
 //     allGames: [],
 //     currentUser: null
 // }

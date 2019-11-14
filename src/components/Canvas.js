@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import duck from '../duckie.png';
 import sushi from '../sushi.png';
-import tuna from '../tuna.png'
+import tuna from '../tuna.png';
+import poop from '../poop.png';
+
 export default class Canvas extends Component {
 
 
@@ -28,6 +30,7 @@ export default class Canvas extends Component {
         const duckImage = this.refs.duckImg;
         const sushiImage = this.refs.sushiImg;
         const tunaImage = this.refs.tunaImg;
+        const poopImage = this.refs.poopImg;
         c.font = "30px Arial";
 
         function Sushi(x,y,velocity,dist,imgSize, props){
@@ -69,6 +72,9 @@ export default class Canvas extends Component {
                 }else if(type === 'tuna'){
                     tunaNum += 5;
                     props.addNum(tunaNum, 'tuna');
+                }else if(type === 'poop'){
+                    poopNum -= 10;
+                    props.addNum(poopNum, 'poop');
                 }
             }
         }
@@ -91,6 +97,14 @@ export default class Canvas extends Component {
             tunaSushis.push(new Sushi(x,y,6,-5,75,this.props))
         }
 
+        let poopNum = this.props.poopNum;
+        let poopArray = [];
+        for(let i=0; i< 10; i++){
+            let x = Math.abs(Math.random() * canvas.width - 200);
+            let y = -5 * canvas.height * Math.random(); 
+            poopArray.push(new Sushi(x,y,4,-5,100,this.props))
+        }
+
         this.setState({
             duck: {x:canvas.width*0.5, y:canvas.height-300},
             width: canvas.width,
@@ -102,7 +116,7 @@ export default class Canvas extends Component {
         }
 
         let animate = () => {
-            let totalScore = ikuraNum + tunaNum
+            let totalScore = ikuraNum + tunaNum + poopNum;
             if(this.props.gameOver){
                   c.clearRect(0, 0, canvas.width, canvas.height); 
                   canvas.setAttribute('style', 'background:black');
@@ -121,6 +135,9 @@ export default class Canvas extends Component {
                 for(let i=0;i<tunaSushis.length;i++){
                     tunaSushis[i].update(this.state.duck, 'tuna', tunaImage);
                 }  
+                for(let i=0;i<poopArray.length;i++){
+                    poopArray[i].update(this.state.duck, 'poop', poopImage);
+                } 
             }  
         }
 
@@ -172,6 +189,7 @@ export default class Canvas extends Component {
                 <img ref='tunaImg' src={tuna} className="hidden" alt="tuna sushi" />
                 <img ref='duckImg' src={duck} className="hidden" alt="duck" />
                 <img ref='sushiImg' src={sushi} className="hidden" alt="ikura roll" />
+                <img ref='poopImg' src={poop} className="hidden" alt="poop" />
                 <canvas ref="canvas" id='canvas'></canvas>   
             </div>
         )
