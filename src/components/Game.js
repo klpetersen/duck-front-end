@@ -19,9 +19,7 @@ export default class Game extends Component {
         console.log(this.props.currentUser)
     }
 
-    componentWillUnmount() { 
-        
-    }
+
 
     addNum = (number, type) => {
         if(type === 'ikura'){
@@ -58,7 +56,10 @@ export default class Game extends Component {
         }, 1000 ) 
     }
 
+
+
     saveGameOver = () => { 
+        console.log(this.state.score, this.props.currentUser.id)
         fetch('http://localhost:3000/games', { 
             method: 'POST', 
             headers: { 
