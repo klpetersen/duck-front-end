@@ -1,36 +1,41 @@
 import React, { Component } from 'react';
 import duckie from '../ducky.png';
-
-
+import Show from './Show';
 
 export default class Home extends Component {
 
+    state={
+        games:[]
+    }
 
-    // componentDidMount(){
-    //     const history = document.querySelector('.history-list');
-    //     let list = this.fetchGames()
-    //     console.log(list);
-    //     history.innerHTML = list;
-    // }
+
+    componentDidMount(){
+        console.log(this.props.currentUser)
+        if(this.props.currentUser !== null){
+            this.fetchGames()
+        }
+    }
 
     fetchGames = () => {
         fetch('http://localhost:3000/games')
             .then(resp => resp.json())
-            .then(data => this.findUserGames(data))
+            .then(data => {
+                if(this.props.currentUser !== null){
+                    let userGames = data.filter(game=> game.user_id === this.props.currentUser.id)
+                    this.setState({
+                        games: userGames
+                    })
+                }
+            })
     }
 
-    findUserGames = (games) => { 
-        let foundGames = games.filter(game => game.user_id === this.props.currentUser.id)
-        // console.log(foundGames)
-        return foundGames.map(game=> <li>{game.created_at}:{game.score}</li>)
-    }
     
     render() {
         if(this.props.currentUser){
             return (
                 <div>
-                    <h1>welcome, {this.props.currentUser.name}</h1>
-                    <ul className="history-list"></ul>
+                    <h1>Welcome, {this.props.currentUser.name}</h1>
+                    <Show games={this.state.games}/>
                 </div>
             )
         }else{

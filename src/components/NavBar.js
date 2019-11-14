@@ -5,7 +5,7 @@ export default class NavBar extends Component {
 
 
     renderNav = (user) => {
-        console.log(user)
+        // console.log(user)
         if(user === null ){
            return( <div className='navigation-bar show' >
                 <ul className='nav-list'>
