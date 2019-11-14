@@ -50,11 +50,9 @@ export default class Canvas extends Component {
                 this.draw(image);   
 
                 if(this.getDistance(x, y, duck.x, duck.y) < 60){
-                    // console.log('touched');
                     y = this.dist * canvas.height * Math.random();
                     x = Math.abs(Math.random() * canvas.width - 200);
                     this.addEaten(type);
-                    // console.log(num);
                 }
             }
 
@@ -80,7 +78,7 @@ export default class Canvas extends Component {
         let sushis=[];
         for(let i=0; i< 20; i++){
             let x = Math.abs(Math.random() * canvas.width - 200);
-            let y = -1 * canvas.height * Math.random(); // randomize this to be a smallish negative number.
+            let y = -1 * canvas.height * Math.random(); 
             // it'll appear to take longer to appear on the screen 
             sushis.push(new Sushi(x,y,3,-2,100,this.props))
         } 
@@ -106,18 +104,16 @@ export default class Canvas extends Component {
         let animate = () => {
             let totalScore = ikuraNum + tunaNum
             if(this.props.gameOver){
-            //    alert('game over!') 
                   c.clearRect(0, 0, canvas.width, canvas.height); 
                   canvas.setAttribute('style', 'background:black');
                   c.fillStyle = 'white';
                   this.props.totalScore(totalScore);
                   c.fillText('Game Over', this.state.width*0.43, this.state.height*0.4);
-                  c.fillText('Total Score: '+ totalScore, this.state.width*0.43, this.state.height*0.6);
+                  c.fillText('Total Score: '+ totalScore, this.state.width*0.43, this.state.height*0.6);        
             }else{
                 requestAnimationFrame(animate);
                 c.clearRect(0, 0, canvas.width, canvas.height);        
                 c.drawImage(duckImage, this.state.duck.x, this.state.duck.y, 100, 100);
-                // let totalScore = ikuraNum + tunaNum
                 c.fillText('Score: '+ totalScore, 50,50);
                 for(let i=0;i<sushis.length;i++){
                         sushis[i].update(this.state.duck, 'ikura', sushiImage);

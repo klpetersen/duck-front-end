@@ -7,7 +7,7 @@ export default class Game extends Component {
         ikuraNum: 0,
         tunaNum:0,
         score: 0,
-        seconds: 45, 
+        seconds: 5, 
         gameOver: false
     }
 
@@ -16,6 +16,7 @@ export default class Game extends Component {
         navbar.classList.add('hidden');
         navbar.classList.remove('show');
         this.updateTimer();
+        console.log(this.props.currentUser)
     }
 
     addNum = (number, type) => {
@@ -28,19 +29,18 @@ export default class Game extends Component {
                 tunaNum: number
             })
         }
-        console.log(this.state.gameOver)
     }
 
     totalScore = (total) => {
         this.setState({
             score: total
         })
-        console.log(this.state.score)
+        this.saveGameOver()
     }
 
     
     updateTimer = () => { 
-        setInterval(() => { 
+        let interval = setInterval(() => { 
             if (this.state.seconds > 0) { 
                 this.setState({ 
                     seconds: this.state.seconds - 1
@@ -49,9 +49,24 @@ export default class Game extends Component {
                 this.setState({ 
                     gameOver: true
                 })
+                clearInterval(interval)
             }
         }, 1000 ) 
-       
+    }
+
+    saveGameOver = () => { 
+        fetch('http://localhost:3000/games', { 
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: this.props.currentUser.id, 
+                score: this.state.score
+            })
+        })
+        
     }
  
     render() {

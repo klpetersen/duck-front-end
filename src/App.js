@@ -14,6 +14,7 @@ class App extends React.Component {
     currentUser: null
   }
 
+
   setCurrentUser = (user) => { 
     this.setState({ 
       currentUser: user
@@ -38,7 +39,7 @@ render(){
             <Route exact path="/login" render={(routerProps) => <Login setCurrentUser={this.setCurrentUser} signOut={this.signOut} {...routerProps} /> } /> 
             <Route exact path='/signup' render={(routerProps) => <SignUp setCurrentUser={this.setCurrentUser} {...routerProps}/> } /> 
             <Route exact path='/leaderboard' render={() => <LeaderBoard /> } /> 
-            <Route exact path='/game' render={() => <Game /> } /> 
+            <Route exact path='/game' render={() => <Game currentUser={this.state.currentUser} /> } /> 
           </Switch>
         </div>
       </ Router>
