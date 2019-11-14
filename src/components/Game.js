@@ -19,6 +19,10 @@ export default class Game extends Component {
         console.log(this.props.currentUser)
     }
 
+    componentWillUnmount() { 
+        
+    }
+
     addNum = (number, type) => {
         if(type === 'ikura'){
             this.setState({
@@ -72,7 +76,7 @@ export default class Game extends Component {
     render() {
         return (
             <div>
-                <Timer seconds={this.state.seconds} />
+                <Timer seconds={this.state.seconds} {...this.props} />
                 <Canvas ikuraNum={this.state.ikuraNum} 
                         tunaNum={this.state.tunaNum}
                         addNum={this.addNum}
