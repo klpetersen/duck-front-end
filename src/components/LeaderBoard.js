@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import LeaderShow from './LeaderShow';
 
 export default class LeaderBoard extends Component {
 
@@ -40,9 +39,9 @@ export default class LeaderBoard extends Component {
             return b.score-a.score;
         })
 
-        return gamesCopy.slice(0,9).map((game,i)=> {
+        return gamesCopy.slice(0,10).map((game,i)=> {
             let user = this.state.users.find(user=> game.user_id === user.id)
-            return <li key={i}>{user.name}: {game.score}</li>
+        return (<li key={i}>{user.name}:<b>{game.score}</b>{' points'}</li>) 
         })
     }
 
@@ -50,9 +49,11 @@ export default class LeaderBoard extends Component {
         
     
         return (
-            <div>
-               <LeaderShow {...this.state}/>
-               <ul>{this.printGames()}</ul>
+            <div className='lb-container'>
+                <div className='lb-box'>
+                <h1 className='lb-h'>High Scores</h1>
+               <ol className='lb-list'>{this.printGames()}</ol>
+               </div>
             </div>
         )
     }
