@@ -92,4 +92,47 @@ input {
     position: relative;
 }  */
 
+.lb-container { 
+    width: 100%; 
+    height: 100vh; 
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    justify-content: center;
 
+}
+
+.lb-box { 
+    margin-top: 30px;
+    width: 1100px;
+    height: 775px; 
+    border-radius: 40px;
+     -webkit-animation: leader 5s infinite;
+}
+@keyframes leader {
+    0% {background: #ADE5FE}
+    50% {background: #F7FEAD }
+    100% {background: #ADE5FE}
+    
+  }
+
+.lb-h { 
+  font-size: 35px;
+  text-align: center;
+
+}
+
+.lb-list { 
+    font-size: 30px;
+    text-align: center;
+    list-style-position: inside;
+    padding: 0
+}
+
+.lb-list li { 
+    padding: 10px;
+}
+
+.lb-list li b { 
+    margin-left: 20px; 
+    font-size: 40px; 
+}
