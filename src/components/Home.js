@@ -34,8 +34,8 @@ export default class Home extends Component {
     render() {
         if(this.props.currentUser){
             return (
-                <div>
-                    <h1>Welcome, {this.props.currentUser.name}</h1>
+                <div id='welcome-container'>
+                    <h1>Welcome, {this.props.currentUser.name}!</h1>
                     <HomeShow games={this.state.games}/>
                 </div>
             )

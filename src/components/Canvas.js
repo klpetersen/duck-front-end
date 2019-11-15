@@ -25,7 +25,7 @@ export default class Canvas extends Component {
     initiateCanvas = () => {
         const canvas = this.refs.canvas;
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight - 90;
+        canvas.height = window.innerHeight - 110;
         const c = canvas.getContext('2d');
         const duckImage = this.refs.duckImg;
         const sushiImage = this.refs.sushiImg;
@@ -152,28 +152,28 @@ export default class Canvas extends Component {
             case 'ArrowLeft':
                 if(x>0){
                     this.setState({
-                        duck: {x: x-50, y: y}
+                        duck: {x: x-100, y: y}
                     })
                 }
                 break;
             case 'ArrowRight':
                 if(x<this.state.width-100){
                     this.setState({
-                        duck: {x: x+50, y: y}
+                        duck: {x: x+100, y: y}
                     })
                 }
                 break;
             case 'ArrowUp':
                 if(y>0){
                     this.setState({
-                        duck: {x: x, y: y-50}
+                        duck: {x: x, y: y-100}
                     })
                 }
                 break;
             case 'ArrowDown':
                 if(y<this.state.height-100){
                     this.setState({
-                        duck: {x: x, y: y+50}
+                        duck: {x: x, y: y+100}
                      })
                 } 
                 break;
