@@ -84,13 +84,63 @@ input {
 }
 
 .timer-box { 
-    text-align: center
+    /* text-align: center */
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    justify-content: center;
 }
 
-/* .home-btn { 
-    float: right; 
-    position: relative;
-}  */
+.timer-empty{
+    width:33%;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    display: flex;
+    font-size:20px;
+}
+
+#tunaImg {
+   height: 30px; 
+   margin-top: 20px;
+}
+
+#sushi { 
+    margin-top:15px;
+}
+
+#poopImg{
+    margin-top:10px;
+}
+
+.icon{
+    width: 40px; 
+    margin-left:15px;
+}
+
+.timer-h1-div{
+    width:33%;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.timer-btn-div{
+    width:33%;
+    text-align: center;
+}
+
+.home-btn { 
+    margin-top:10px;
+    width:auto;
+    padding:10px;
+    border-style: none;
+    color:salmon;
+} 
+
+.home-btn:hover{
+    color:#ADE5FE;
+}
+
 
 .lb-container { 
     width: 100%; 
@@ -148,12 +198,13 @@ input {
 
 #welcome-container h1 { 
     -webkit-animation: history 5s infinite;
+
 }
 
 @keyframes history {
-    0% {font-size: 60px}
-    50% {font-size: 75px }
-    100% {font-size: 60px}
+    0% {font-size: 60px; color:#ff8533}
+    50% {font-size: 75px; color: #ff4d4d}
+    100% {font-size: 60px; color:#ff8533}
     
   }
 

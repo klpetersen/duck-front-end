@@ -25,7 +25,7 @@ export default class Canvas extends Component {
     initiateCanvas = () => {
         const canvas = this.refs.canvas;
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight - 110;
+        canvas.height = window.innerHeight - 81;
         const c = canvas.getContext('2d');
         const duckImage = this.refs.duckImg;
         const sushiImage = this.refs.sushiImg;
