@@ -17,13 +17,13 @@ export default class LeaderBoard extends Component {
 
     getGames = () => {
 
-        fetch('http://localhost:3000/games')
+        fetch('https://ducky-api.herokuapp.com/games')
             .then(resp => resp.json())
             .then(data => this.getUsers(data))
     }
 
     getUsers = (data) =>{
-        fetch('http://localhost:3000/users')
+        fetch('https://ducky-api.herokuapp.com/users')
         .then(resp => resp.json())
         .then(resp => {
             this.setState({

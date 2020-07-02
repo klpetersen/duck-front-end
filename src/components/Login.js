@@ -20,7 +20,7 @@ export default class Login extends Component {
 
     handleSubmit = (event) =>  { 
        event.preventDefault(); 
-       fetch('http://localhost:3000/users')
+       fetch('https://ducky-api.herokuapp.com/users')
        .then(resp => resp.json())
        .then(resp => this.findUser(resp))
     }

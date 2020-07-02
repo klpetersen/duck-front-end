@@ -18,7 +18,7 @@ export default class Home extends Component {
     }
 
     fetchGames = () => {
-        fetch('http://localhost:3000/games')
+        fetch('https://ducky-api.herokuapp.com/games')
             .then(resp => resp.json())
             .then(data => {
                 if(this.props.currentUser !== null){

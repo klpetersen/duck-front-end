@@ -63,7 +63,7 @@ export default class Game extends Component {
 
 
     saveGameOver = () => { 
-        fetch('http://localhost:3000/games', { 
+        fetch('https://ducky-api.herokuapp.com/games', { 
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json',
